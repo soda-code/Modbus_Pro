@@ -8,6 +8,7 @@
 void mb_rtu_send(const uint8_t *data, uint16_t length) 
 {
 
+    uasrt_send(mb_rtu_inf.usart, data, length);
 }
 
 //**************************************************************
@@ -19,5 +20,6 @@ void mb_rtu_send(const uint8_t *data, uint16_t length)
 void mb_rtu_receive(uint8_t *buffer, uint16_t buffer_length) 
 {
 
+    uasrt_receive(mb_rtu_inf.usart, buffer, buffer_length);
 }
 
