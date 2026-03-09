@@ -19,6 +19,7 @@ typedef enum
 
 typedef struct 
 {
+    mb_mode_t mode;             // Modbus mode (RTU, ASCII, TCP)
     void (*init)(void); // Function pointer for initialization
     void (*send)(const uint8_t *data, uint16_t length); // Function pointer for sending data
     void (*receive)(uint8_t *buffer, uint16_t buffer_length); // Function pointer for receiving data
