@@ -8,7 +8,7 @@
  *****************************************************************/
 #ifndef __MB_H
 #define __MB_H
-#include <stdint.h>
+#include "mb_config.h"
 
 typedef enum 
 {
