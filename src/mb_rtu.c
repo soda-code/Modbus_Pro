@@ -49,7 +49,7 @@ void mb_rtu_send(uint8_t device_addr, uint8_t function_code, uint8_t *data, uint
 //@return None
 //**************************************************************
 
-void mb_rtu_receive(uint8_t *buffer, uint16_t buffer_length) 
+void mb_rtu_receive(uint8_t *buffer, uint16_t buffer_length)    
 {
    mb_rtu_frame_t received_frame; // Variable to hold the received Modbus RTU frame
     // Parse the received buffer to fill the Modbus RTU frame structure (parsing logic not shown here)
