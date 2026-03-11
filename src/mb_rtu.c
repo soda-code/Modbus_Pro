@@ -48,22 +48,39 @@ void mb_rtu_send(uint8_t device_addr, uint8_t function_code, uint8_t *data, uint
 //@param  buffer_length Length of the buffer.
 //@return None
 //**************************************************************
-
-void mb_rtu_receive(uint8_t *buffer, uint16_t buffer_length) 
+mb_rtu_adu_t received_frame;
+void mb_rtu_receive(uint8_t device_addr, uint8_t *buffer, uint16_t buffer_length)    
 {
-   mb_rtu_frame_t received_frame; // Variable to hold the received Modbus RTU frame
-    // Parse the received buffer to fill the Modbus RTU frame structure (parsing logic not shown here)
-    // Example parsing logic (not complete):
-    if (buffer_length >= 4) // Minimum length for a valid Modbus RTU frame
+    uint8_t received_function_code;
+    if(device_addr != MB_DEVICE_ADDR_ALL) // Check if the received frame is for this device or a broadcast
     {
-        received_frame.device_addr = buffer[0]; // Extract device address
-        received_frame.function_code = buffer[1]; // Extract function code
-        received_frame.data_length = buffer_length - 4; // Calculate data length (total length - device address - function code - CRC)
-        for (uint16_t i = 0; i < received_frame.data_length; i++) 
+        return; // Ignore frames that are not addressed to this device or broadcast
+    }
+    else if (buffer_length < 4) // Minimum length for a valid Modbus RTU frame (device address + function code + CRC)
+    {
+        received_function_code = buffer[0]; // Extract function code for error handling
+        switch(received_function_code)
         {
-            received_frame.data[i] = buffer[2 + i]; // Extract data
+            case MB_FUNC_READ_COILS:
+            case MB_FUNC_READ_DISCRETE_INPUTS:
+            case MB_FUNC_READ_HOLDING_REGISTERS:
+            case MB_FUNC_READ_INPUT_REGISTERS:
+            case MB_FUNC_WRITE_SINGLE_COIL:
+            case MB_FUNC_WRITE_SINGLE_REGISTER:
+            case MB_FUNC_WRITE_MULTIPLE_COILS:
+            case MB_FUNC_WRITE_MULTIPLE_REGISTERS:
+                // Handle specific function code errors if needed
+                break;
+            default:
+                // Handle illegal function code error
+                break;
         }
-        received_frame.crc = (buffer[2 + received_frame.data_length] << 8) | buffer[3 + received_frame.data_length]; // Extract CRC
-    }   
+    } 
+    else
+    {
+        // Process the received frame (e.g., validate CRC, extract data, etc.)
+        // This is a placeholder for actual processing logic
+        // You would typically validate the CRC and then extract the data based on the function code
+    }
 }
 

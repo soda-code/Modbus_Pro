@@ -26,4 +26,7 @@
 //******************* USB Configuration *******************
 #define USB_ENABLE   1          // Enable USB support for Modbus communication (0: Disable, 1: Enable)
 
+//******************* Timer Configuration *******************
+#define TIMER_ENABLE   1        // Enable timer support for Modbus communication (0: Disable, 1: Enable)
+
 #endif // __MB_CONFIG_H
