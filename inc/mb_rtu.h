@@ -23,8 +23,12 @@ typedef enum   //设备地址
     MB_DEVICE_ADDR_7 = 0x07, //设备地址7
     MB_DEVICE_ADDR_8 = 0x08, //设备地址8
     MB_DEVICE_ADDR_9 = 0x09, //设备地址9
+<<<<<<< HEAD
     MB_DEVICE_ADDR_10 = 0x0A, //设备地址10
     MB_DEVICE_ADDR_MAX = 0x20 //设备地址10
+=======
+    MB_DEVICE_ADDR_10 = 0x0A //设备地址10
+>>>>>>> b3078bc3599ddd4999fb1d30607e99d3d04837b8
 } mb_device_addr_t;
 
 typedef enum   //功能码 
@@ -36,10 +40,25 @@ typedef enum   //功能码
     MB_FUNC_WRITE_SINGLE_COIL           = 0x05, //写单个线圈
     MB_FUNC_WRITE_SINGLE_REGISTER       = 0x06, //写单个寄存器
     MB_FUNC_WRITE_MULTIPLE_COILS        = 0x0F, //写多个线圈
+<<<<<<< HEAD
     MB_FUNC_WRITE_MULTIPLE_REGISTERS    = 0x10,  //写多个寄存器
     MB_FUNC_MAX                         = 0xFF  //写多个寄存器
 } mb_function_code_t;
 
+=======
+    MB_FUNC_WRITE_MULTIPLE_REGISTERS    = 0x10  //写多个寄存器
+
+} mb_function_code_t;
+
+typedef enum   //异常功能码 
+{
+    MB_EXCEPT_ILLEGAL_FUNCTION      = 0x01, //非法功能
+    MB_EXCEPT_ILLEGAL_DATA_ADDRESS  = 0x02, //非法数据地址
+    MB_EXCEPT_ILLEGAL_DATA_VALUE    = 0x03, //非法数据值
+    MB_EXCEPT_SLAVE_DEVICE_FAILURE  = 0x04  //从设备故障
+} mb_exception_code_t;
+
+>>>>>>> b3078bc3599ddd4999fb1d30607e99d3d04837b8
 typedef struct 
 {
     mb_device_addr_t device_addr;       //设备地址
@@ -49,6 +68,7 @@ typedef struct
     uint16_t crc;                       //CRC校验码
 } mb_rtu_adu_t;
 
+<<<<<<< HEAD
 typedef enum // RTU错误码
 {
     MB_RTU_ERROR_NONE = 0,              //无错误
@@ -65,5 +85,12 @@ extern mb_rtu_adu_t mb_rtu_tx_adu; // Modbus RTU ADU结构体实例
 void mb_rtu_init(void);  // Function prototype for initializing Modbus RTU mode
 void mb_rtu_send(mb_device_addr_t device_addr, mb_function_code_t function_code, uint8_t *data, uint16_t data_length) ;         // Function prototype for sending data in Modbus RTU mode
 void mb_rtu_receive( uint8_t *buffer, uint16_t buffer_length);   // Function prototype for receiving data in Modbus RTU mode
+=======
+extern mb_rtu_adu_t mb_rtu_adu; // Modbus RTU ADU结构体实例
+
+void mb_rtu_init(void);  // Function prototype for initializing Modbus RTU mode
+void mb_rtu_send(mb_device_addr_t device_addr, uint8_t function_code, uint8_t *data, uint16_t data_length) ;         // Function prototype for sending data in Modbus RTU mode
+void mb_rtu_receive(mb_device_addr_t device_addr, uint8_t *buffer, uint16_t buffer_length);   // Function prototype for receiving data in Modbus RTU mode
+>>>>>>> b3078bc3599ddd4999fb1d30607e99d3d04837b8
 
 #endif // __MB_RTU_H

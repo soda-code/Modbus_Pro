@@ -51,6 +51,7 @@ void mb_rtu_send(uint8_t device_addr, mb_function_code_t function_code, uint8_t 
 //@param  buffer_length Length of the buffer.
 //@return None
 //**************************************************************
+<<<<<<< HEAD
 
 void mb_rtu_receive( uint8_t *buffer, uint16_t buffer_length)    
 {
@@ -72,6 +73,19 @@ void mb_rtu_receive( uint8_t *buffer, uint16_t buffer_length)
     }
     if (buffer_length < 4) // Minimum length for a valid Modbus RTU frame (device address + function code + CRC)
     {
+=======
+mb_rtu_adu_t received_frame;
+void mb_rtu_receive(uint8_t device_addr, uint8_t *buffer, uint16_t buffer_length)    
+{
+    uint8_t received_function_code;
+    if(device_addr != MB_DEVICE_ADDR_ALL) // Check if the received frame is for this device or a broadcast
+    {
+        return; // Ignore frames that are not addressed to this device or broadcast
+    }
+    else if (buffer_length < 4) // Minimum length for a valid Modbus RTU frame (device address + function code + CRC)
+    {
+        received_function_code = buffer[0]; // Extract function code for error handling
+>>>>>>> b3078bc3599ddd4999fb1d30607e99d3d04837b8
         switch(received_function_code)
         {
             case MB_FUNC_READ_COILS:
