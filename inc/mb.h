@@ -24,7 +24,7 @@ typedef struct
 {
     mb_mode_t mode;     // Modbus mode (RTU, ASCII, TCP)
     void (*init)        (void); // Function pointer for initialization
-    void (* RtuSend)    (uint8_t device_addr, uint8_t function_code, uint8_t *data, uint16_t length); // Function pointer for sending data
+    void (* RtuSend)    (uint8_t device_addr, mb_function_code_t function_code, uint8_t *data, uint16_t length); // Function pointer for sending data
     void (* AsciiSend)  (const uint8_t *data, uint16_t length); // Function pointer for sending data
     void (* TcpSend)    (const uint8_t *data, uint16_t length); // Function pointer for sending data
     void (* RtuReceive) (uint8_t *buffer, uint16_t buffer_length); // Function pointer for receiving data

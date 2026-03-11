@@ -62,3 +62,4 @@ uint32_t mb_rtu_crc32(const uint8_t *data, uint32_t length)
     }
     return ~crc; // Return the calculated CRC value (bitwise NOT)
 }
+
