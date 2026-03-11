@@ -6,6 +6,7 @@
 //@param    :mode Modbus mode (RTU, ASCII, TCP).
 //@return   :None
 //********************************************************************************
+
 mb_t *mb_g_all ; // Global variable to hold the Modbus context
 void mb_init(mb_mode_t mode) 
 {
@@ -52,7 +53,7 @@ void mb_send(mb_mode_t mode, const uint8_t *data, uint16_t length)
     {
         case MB_MODE_RTU:
             uint8_t device_addr = MB_DEVICE_ADDR_1; // Example device address
-            uint8_t function_code = MB_FUNC_WRITE_SINGLE_REGISTER; // Example function code
+            mb_function_code_t function_code = MB_FUNC_WRITE_SINGLE_REGISTER; // Example function code
             mb_g_all->RtuSend(device_addr, function_code, (uint8_t *)data, length); // Call the send function for Modbus RTU mode
             break;
         case MB_MODE_ASCII:
