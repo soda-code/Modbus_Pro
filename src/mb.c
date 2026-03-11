@@ -76,12 +76,12 @@ void mb_send(mb_mode_t mode, const uint8_t *data, uint16_t length)
 //@return None
 //********************************************************************************
 
-void mb_receive(mb_mode_t mode,mb_device_addr_t device_addr, uint8_t *buffer, uint16_t buffer_length) 
+void mb_receive(mb_mode_t mode, uint8_t *buffer, uint16_t buffer_length) 
 {
     switch (mode) 
     {
         case MB_MODE_RTU:
-            mb_g_all->RtuReceive(device_addr, buffer, buffer_length); // Call the receive function for Modbus RTU mode
+            mb_g_all->RtuReceive(buffer, buffer_length); // Call the receive function for Modbus RTU mode
             break;
         case MB_MODE_ASCII:
             mb_g_all->AsciiReceive(buffer, buffer_length); // Call the receive function for Modbus ASCII mode
